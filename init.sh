@@ -36,6 +36,9 @@ curl -sLo ./yq.tar.gz https://github.com/mikefarah/yq/releases/download/v4.27.2/
 curl -sLO https://dl.k8s.io/release/v1.24.0/bin/linux/amd64/kubectl \
     && chmod +x ./kubectl \
     && sudo mv ./kubectl /usr/local/bin/
+echo "source <(kubectl completion bash)" >> ~/.bashrc # add autocomplete permanently to your bash shell. 
+echo "alias k=kubectl" >> ~/.bashrc 
+echo "complete -o default -F __start_kubectl k" >> ~/.bashrc
 
 # kind
 curl -sLo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64 \
@@ -76,6 +79,11 @@ curl -sLo ./Insomnia.Core-2022.7.5.deb https://github.com/Kong/insomnia/releases
     && sudo dpkg -i Insomnia.Core-2022.7.5.deb \
     && rm Insomnia.Core-2022.7.5.deb
 
+# nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+nvm install 20.12.2 \
+  && sudo npm install -g pnpm
+
 # 2023/2/27: fix gke auth for k9s
 sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
@@ -85,6 +93,22 @@ kubectl config set-context --current --namespace=devns6
 # clone kubeconfig to root so kubefwd works
 sudo cp -R ~/.kube /root/
 
+# update docker-ce
+sudo apt update \
+  && sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
+  && sudo sed -i 's|^command=/usr/local/bin/dockerd$|command=/usr/bin/dockerd|' /etc/supervisor/conf.d/dockerd.conf \
+  && sudo supervisorctl reread \
+  && sudo supervisorctl update
+
+# ngrok
+curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+  && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list \
+  && sudo apt update \
+  && sudo apt install ngrok
+
+echo "PATH=/usr/bin:/usr/local/go/bin:$PATH" >> ~/.bashrc
 
 # login github
 gh auth login -p https -h github.com -w
+
+echo "remember to source ~/.bashrc"
