@@ -81,7 +81,11 @@ curl -sLo ./Insomnia.Core-2022.7.5.deb https://github.com/Kong/insomnia/releases
 
 # nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 nvm install 20.12.2 \
+  && nvm use 20.12.2 \
   && sudo npm install -g pnpm
 
 # 2023/2/27: fix gke auth for k9s
