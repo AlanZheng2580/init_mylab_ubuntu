@@ -87,6 +87,7 @@ export NVM_DIR="$HOME/.nvm"
 nvm install 20.12.2 \
   && nvm use 20.12.2 \
   && sudo npm install -g pnpm
+sudo rm /usr/bin/node
 
 # 2023/2/27: fix gke auth for k9s
 sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
