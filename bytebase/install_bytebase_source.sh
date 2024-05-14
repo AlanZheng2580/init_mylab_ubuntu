@@ -14,7 +14,7 @@ export DOCKER_BUILDKIT=0
 echo "export DOCKER_BUILDKIT=0" >> ~/.bashrc
 
 # cd ~/bytebase
-git clone https://github.com/cyching/bytebase.git
+git clone https://github.com/AlanZheng2580/bytebase.git
 cd bytebase/scripts
 git checkout fork/2.16.0
 sed -i '/Dockerfile/a --build-arg TARGETARCH="amd64" \\' ~/bytebase/bytebase/scripts/build_bytebase_docker.sh
