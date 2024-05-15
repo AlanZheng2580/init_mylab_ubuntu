@@ -4,6 +4,9 @@ set -xe
 
 # .bash_aliases
 echo "alias dc='docker compose'" >> ~/.bashrc
+echo "alias ls='ls --color=auto'" >> ~/.bashrc
+echo "alias ll='ls -alh'" >> ~/.bashrc
+echo "alias grep='grep --color=auto'" >> ~/.bashrc
 
 # not sure why sandbox enabled DEBUG by default, disable it to prevent kubectl exec spamming.
 echo "unset DEBUG" >> ~/.bashrc
