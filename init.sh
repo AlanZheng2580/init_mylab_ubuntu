@@ -8,6 +8,9 @@ echo "alias ls='ls --color=auto'" >> ~/.bashrc
 echo "alias ll='ls -alh'" >> ~/.bashrc
 echo "alias grep='grep --color=auto'" >> ~/.bashrc
 
+# git completion
+echo "source /usr/share/bash-completion/completions/git" >> ~/.bashrc
+
 # not sure why sandbox enabled DEBUG by default, disable it to prevent kubectl exec spamming.
 echo "unset DEBUG" >> ~/.bashrc
 
@@ -72,10 +75,21 @@ curl -sLo ./kubefwd_amd64.deb https://github.com/txn2/kubefwd/releases/download/
     && rm kubefwd_amd64.deb
 
 # go
-curl -sLo go1.21.6.linux-amd64.tar.gz https://go.dev/dl/go1.21.6.linux-amd64.tar.gz \
-    && sudo rm -rf /usr/local/go \
-    && sudo tar -C /usr/local -xzf go1.21.6.linux-amd64.tar.gz \
-    && rm go1.21.6.linux-amd64.tar.gz
+#curl -sLo go1.21.6.linux-amd64.tar.gz https://go.dev/dl/go1.21.6.linux-amd64.tar.gz \
+#    && sudo rm -rf /usr/local/go \
+#    && sudo tar -C /usr/local -xzf go1.21.6.linux-amd64.tar.gz \
+#    && rm go1.21.6.linux-amd64.tar.gz
+sudo apt-get install -y bison \
+    && bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer) \
+    && source /home/kasm-user/.gvm/scripts/gvm \
+    && gvm install go1.4 -B
+gvm use go1.4
+#export GOROOT_BOOTSTRAP=$GOROOT
+#gvm install go1.17.13 -B
+#gvm use go1.17.13
+export GOROOT_BOOTSTRAP=$GOROOT
+gvm install go1.20 -B
+gvm use go1.20
 
 # insomnia
 curl -sLo ./Insomnia.Core-2022.7.5.deb https://github.com/Kong/insomnia/releases/download/core%402022.7.5/Insomnia.Core-2022.7.5.deb \
@@ -113,6 +127,10 @@ curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trust
   && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list \
   && sudo apt update \
   && sudo apt install ngrok
+
+# sshuttle & sshfs
+sudo apt install -y sshuttle sshfs
+mkdir -p /mnt/droplet/ && sshfs -p 2004 -o allow_other,default_permissions alan@alanz.ddns.net:/home/alan/workspace /mnt/droplet/
 
 echo "PATH=/usr/bin:/usr/local/go/bin:$PATH" >> ~/.bashrc
 
