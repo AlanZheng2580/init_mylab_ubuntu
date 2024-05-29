@@ -130,7 +130,7 @@ curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trust
 
 # sshuttle & sshfs
 sudo apt install -y sshuttle sshfs
-#mkdir -p /mnt/droplet/ && sshfs -p 2004 -o allow_other,default_permissions alan@alanz.ddns.net:/home/alan/workspace /mnt/droplet/
+#sudo mkdir -p /mnt/droplet/ && sudo sshfs -p 2004 -o allow_other,default_permissions alan@alanz.ddns.net:/home/alan/workspace /mnt/droplet/
 
 echo "PATH=/usr/bin:/usr/local/go/bin:$PATH" >> ~/.bashrc
 
