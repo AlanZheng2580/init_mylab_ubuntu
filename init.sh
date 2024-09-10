@@ -9,8 +9,8 @@ echo "alias dc='docker compose'" >> ~/.bashrc
 echo "unset DEBUG" >> ~/.bashrc
 
 # Get your wrapped email from https://github.com/settings/emails
-git config --global user.email "a0955857152@gmail.com"
-git config --global user.name "AlanZheng"
+git config --global user.email "168727160+AlanZheng2580@users.noreply.github.com"
+git config --global user.name "AlanZheng2580"
 
 # cache git credential for 1 week.
 git config --global credential.helper "cache --timeout=604800"
