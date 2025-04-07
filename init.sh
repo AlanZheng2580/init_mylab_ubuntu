@@ -99,11 +99,11 @@ kubectl config set-context --current --namespace=devns6
 sudo cp -R ~/.kube /root/
 
 # update docker-ce
-sudo apt update \
-  && sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
-  && sudo sed -i 's|^command=/usr/local/bin/dockerd$|command=/usr/bin/dockerd|' /etc/supervisor/conf.d/dockerd.conf \
-  && sudo supervisorctl reread \
-  && sudo supervisorctl update
+#sudo apt update \
+#  && sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
+#  && sudo sed -i 's|^command=/usr/local/bin/dockerd$|command=/usr/bin/dockerd|' /etc/supervisor/conf.d/dockerd.conf \
+#  && sudo supervisorctl reread \
+#  && sudo supervisorctl update
 
 # ngrok
 curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
