@@ -116,4 +116,6 @@ echo "PATH=/usr/bin:/usr/local/go/bin:$PATH" >> ~/.bashrc
 # login github
 gh auth login -p https -h github.com -w
 
+mkdir -p ~/workspace
+
 echo "remember to source ~/.bashrc"
